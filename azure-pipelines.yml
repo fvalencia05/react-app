@@ -4,7 +4,16 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  imageName: 'fabiovg10/react-pdn'
+
 steps:
+- task: Docker@2
+  displayName: Build image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: Dockerfile.prod
 
 - task: CopyFiles@2
   displayName: 'Copy Files to:$(Build.ArtifactStagingDirectory)'
