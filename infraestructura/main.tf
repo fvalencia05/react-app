@@ -25,6 +25,10 @@ resource "azurerm_container_group" "terraform" {
     image  = "fabiovg10/react-pdn:v1"
     cpu    = "0.5"
     memory = "1.5"
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
   }
 
   tags = {
