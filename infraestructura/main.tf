@@ -22,7 +22,7 @@ resource "azurerm_container_group" "terraform" {
 
   container {
     name   = "react-pdn"
-    image  = "fabiovg10/react-pdn:v2"
+    image  = "fabiovg10/react-pdn:latest"
     cpu    = "0.5"
     memory = "1.5"
     ports {
