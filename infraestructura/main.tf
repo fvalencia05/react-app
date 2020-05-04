@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "terraform" {
   location = "Central US"
 }
 
-resource "azurerm_container_group" "example" {
+resource "azurerm_container_group" "terraform" {
   name                = "Central US-continst"
   location            = "${azurerm_resource_group.terraform.location}"
   resource_group_name = "${azurerm_resource_group.terraform.name}"
@@ -25,7 +25,6 @@ resource "azurerm_container_group" "example" {
     image  = "fabiovg10/react-pdn:v1"
     cpu    = "0.5"
     memory = "1.5"
-    port   = "80"
   }
 
   tags = {
