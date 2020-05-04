@@ -5,7 +5,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "terraform" {
   name     = "containers-resource-group"
   location = "westus"
-  id = "containers-resource-group"
+    tags = {
+    version = "latest"
+  }
 }
 
 resource "azurerm_container_group" "terraform" {
