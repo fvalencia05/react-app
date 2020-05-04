@@ -3,12 +3,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "terraform" {
-  name     = "terraform-resource-group"
+  name     = "containers-resource-group"
   location = "westus"
 }
 
 resource "azurerm_container_group" "terraform" {
-  name                = "terraform-container-group"
+  name                = "containers-group"
   location            = "${azurerm_resource_group.terraform.location}"
   resource_group_name = "${azurerm_resource_group.terraform.name}"
   ip_address_type     = "public"
