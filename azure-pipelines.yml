@@ -9,9 +9,7 @@ variables:
 
 stages:
 - stage: BuildDockerFile
-  jobs:
-  - job: BuildDockerFileJob
-    steps:
+  steps:
     - task: Docker@2
       displayName: Build image
       inputs:
@@ -27,16 +25,14 @@ stages:
         command: push
         tags: latest
 
-  - stage: Deploy
-  jobs:
-  - job: DeployJob
-    steps:
-    - task: CopyFiles@2
-      displayName: 'Copy Files to:$(Build.ArtifactStagingDirectory)'
-      inputs:
-        SourceFolder: infraestructura
-        Contents: '**.tf'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- stage: Deploy
+  steps:
+  - task: CopyFiles@2
+    displayName: 'Copy Files to:$(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: infraestructura
+      Contents: '**.tf'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
