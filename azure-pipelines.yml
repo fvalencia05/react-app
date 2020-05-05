@@ -4,7 +4,7 @@ trigger:
 variables:
   imageName: 'fabiovg10/react-pdn'
   vmImageName: 'ubuntu-latest'
-  tag: '$(Build.BuildId)'
+  tag: 'BuildId_$(Build.BuildId)'
 
 stages:
 - stage: Build
