@@ -9,24 +9,16 @@ variables:
 
 stages:
 - stage: BuildApp
-  displayName: Build React App stage
+  displayName: Build and Test React App stage
   jobs:
   - job: BuildReactAppJob
-    displayName: Build React App Job
+    displayName: Build and Test React App Job
     pool: 
       vmImage: $(vmImageName)
     steps:
     - script: npm install
     - script: npm run build
-- stage: TestApp
-  displayName: Test React App stage
-  jobs:
-  - job: TestReactAppJob
-    displayName: Test React App Job
-    pool: 
-      vmImage: $(vmImageName)
-    steps:
-    - script: npm test
+    - script: npm run test
 - stage: Build
   displayName: Build Dockerfile stage
   jobs:
