@@ -49,10 +49,16 @@ stages:
     pool: 
       vmImage: vs2017-win2016
     steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform init'
       inputs:
-        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
+        TemplatePath: '$(System.ArtifactsDirectory)'
         Arguments: init
         InstallTerraform: true
         UseAzureSub: true
@@ -60,7 +66,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform plan'
       inputs:
-        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
+        TemplatePath: '$(System.ArtifactsDirectory)'
         Arguments: plan
         InstallTerraform: true
         UseAzureSub: true
@@ -68,7 +74,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform apply'
       inputs:
-        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
+        TemplatePath: '$(System.ArtifactsDirectory)'
         Arguments: 'apply -auto-approve'
         InstallTerraform: true
         UseAzureSub: true
