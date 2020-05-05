@@ -2,6 +2,11 @@ provider "azurerm" {
   version = "=1.27"
 }
 
+variable "tag" {
+  default = ""
+  description = "The prefix used for all resources in this example"
+}
+
 resource "azurerm_resource_group" "terraform" {
   name     = "containers-resource-group"
   location = "westus"
