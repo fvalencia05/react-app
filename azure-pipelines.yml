@@ -5,6 +5,7 @@ variables:
   imageName: 'fabiovg10/react-pdn'
   vmImageName: 'ubuntu-latest'
   tag: 'BuildId_$(Build.BuildId)'
+  subscription: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
 
 stages:
 - stage: Build
@@ -23,7 +24,7 @@ stages:
         Dockerfile: Dockerfile.prod
         containerRegistry: DockerHubLogin
         tags: |
-          latest
+          $(tag)
 
 - stage: PublishTFArtifacts
   displayName: Publish tf artifacts
@@ -55,6 +56,11 @@ stages:
         downloadType: 'single'
         artifactName: 'drop'
         downloadPath: '$(System.ArtifactsDirectory)'
+    - task: FileTransform@1
+        displayName: 'File Transform: '
+        inputs:
+          folderPath: '$(System.ArtifactsDirectory)\drop'
+          targetFiles: main.tf
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform init'
       inputs:
@@ -62,7 +68,7 @@ stages:
         Arguments: init
         InstallTerraform: true
         UseAzureSub: true
-        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+        ConnectedServiceNameARM: $(subscription)
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform plan'
       inputs:
@@ -70,14 +76,15 @@ stages:
         Arguments: plan
         InstallTerraform: true
         UseAzureSub: true
-        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+        ConnectedServiceNameARM: $(subscription)
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform apply'
       inputs:
         TemplatePath: '$(System.ArtifactsDirectory)\drop'
+        -var: 'tag=$(tag)'
         Arguments: 'apply -auto-approve'
         InstallTerraform: true
         UseAzureSub: true
-        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+        ConnectedServiceNameARM: $(subscription)
 
 
