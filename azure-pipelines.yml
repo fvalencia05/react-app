@@ -9,7 +9,7 @@ variables:
 
 stages:
 - stage: BuildDockerFile
-  steps:
+  step:
     - task: Docker@2
       displayName: Build image
       inputs:
@@ -26,7 +26,7 @@ stages:
         tags: latest
 
 - stage: Deploy
-  steps:
+  step:
   - task: CopyFiles@2
     displayName: 'Copy Files to:$(Build.ArtifactStagingDirectory)'
     inputs:
