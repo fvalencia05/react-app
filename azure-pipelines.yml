@@ -52,7 +52,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform init'
       inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
         Arguments: init
         InstallTerraform: true
         UseAzureSub: true
@@ -60,7 +60,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform plan'
       inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
         Arguments: plan
         InstallTerraform: true
         UseAzureSub: true
@@ -68,7 +68,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform apply'
       inputs:
-        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)/drop'
         Arguments: 'apply -auto-approve'
         InstallTerraform: true
         UseAzureSub: true
