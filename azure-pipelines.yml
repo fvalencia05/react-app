@@ -23,7 +23,7 @@ stages:
         Dockerfile: Dockerfile.prod
         containerRegistry: DockerHubLogin
         tags: |
-          $(tag)
+          latest
 
 - stage: PublishTFArtifacts
   displayName: Publish tf artifacts
@@ -41,3 +41,37 @@ stages:
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
+- stage: Deploy
+  displayName: Deploy to container
+  jobs:
+  - job: DeployJob
+    displayName: Deploy to container job
+    pool: 
+      vmImage: $(vmImageName)
+    steps:
+    - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+      displayName: 'Terraform init'
+      inputs:
+        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        Arguments: init
+        InstallTerraform: true
+        UseAzureSub: true
+        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+    - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+      displayName: 'Terraform plan'
+      inputs:
+        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        Arguments: plan
+        InstallTerraform: true
+        UseAzureSub: true
+        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+    - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+      displayName: 'Terraform apply'
+      inputs:
+        TemplatePath: '$(System.DefaultWorkingDirectory)/_React-App CI/drop'
+        Arguments: 'apply -auto-approve'
+        InstallTerraform: true
+        UseAzureSub: true
+        ConnectedServiceNameARM: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+
+
