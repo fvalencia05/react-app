@@ -8,6 +8,25 @@ variables:
   subscription: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
 
 stages:
+- stage: BuildApp
+  displayName: Build React App stage
+  jobs:
+  - job: BuildReactAppJob
+    displayName: Build React App Job
+    pool: 
+      vmImage: $(vmImageName)
+    steps:
+    - script: npm install
+    - script: npm run build
+- stage: TestApp
+  displayName: Test React App stage
+  jobs:
+  - job: TestReactAppJob
+    displayName: Test React App Job
+    pool: 
+      vmImage: $(vmImageName)
+    steps:
+    - script: npm test
 - stage: Build
   displayName: Build Dockerfile stage
   jobs:

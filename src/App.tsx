@@ -11,7 +11,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <p>
-          Hola Mundo React - App. Esta es una prueba DevOps
+          Hola Mundo React - App. Esta es una prueba DevOps con Terraform
         </p>
         <a
           className="App-link"
