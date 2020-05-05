@@ -68,7 +68,7 @@ stages:
       displayName: 'Terraform plan'
       inputs:
         TemplatePath: '$(System.ArtifactsDirectory)\drop'
-        Arguments: plan -var 'tag=$(tag)' 
+        Arguments: plan -var tag=$(tag) 
         InstallTerraform: true
         UseAzureSub: true
         ConnectedServiceNameARM: $(subscription)
