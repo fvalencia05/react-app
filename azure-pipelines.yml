@@ -47,7 +47,7 @@ stages:
   - job: DeployJob
     displayName: Deploy to container job
     pool: 
-      vmImage: $(vmImageName)
+      vmImage: vs2017-win2016
     steps:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform init'
