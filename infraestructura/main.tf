@@ -1,14 +1,10 @@
 provider "azurerm" {
-  features {}
+  version = "~> 2.0.0"
 }
 
 resource "azurerm_resource_group" "terraform" {
-  id = "containers-resource-group"
   name     = "containers-resource-group"
   location = "westus"
-    tags = {
-    version = "latest"
-  }
 }
 
 resource "azurerm_container_group" "terraform" {
