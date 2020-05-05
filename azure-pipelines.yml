@@ -58,7 +58,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform init'
       inputs:
-        TemplatePath: '$(System.ArtifactsDirectory)'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)'
         Arguments: init
         InstallTerraform: true
         UseAzureSub: true
@@ -66,7 +66,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform plan'
       inputs:
-        TemplatePath: '$(System.ArtifactsDirectory)'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)'
         Arguments: plan
         InstallTerraform: true
         UseAzureSub: true
@@ -74,7 +74,7 @@ stages:
     - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
       displayName: 'Terraform apply'
       inputs:
-        TemplatePath: '$(System.ArtifactsDirectory)'
+        TemplatePath: '$(Build.ArtifactStagingDirectory)'
         Arguments: 'apply -auto-approve'
         InstallTerraform: true
         UseAzureSub: true
