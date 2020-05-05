@@ -1,6 +1,5 @@
 provider "azurerm" {
   version = "=1.27"
-  features {}
 }
 
 resource "azurerm_resource_group" "terraform" {
