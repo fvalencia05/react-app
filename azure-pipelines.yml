@@ -5,7 +5,7 @@ variables:
   imageName: 'fabiovg10/react-pdn'
   vmImageName: 'ubuntu-latest'
   tag: 'BuildId_$(Build.BuildId)'
-  subscription: 'Evaluación gratuita (624b94b8-99b4-4a2d-b386-84385e044d72)'
+  subscription: '<subscription>'
 
 stages:
 - stage: BuildApp

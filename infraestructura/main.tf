@@ -21,8 +21,8 @@ resource "azurerm_container_group" "terraform" {
 
   image_registry_credential {
     server   = "hub.docker.com"
-    username = "fabiovg10"
-    password = "Docker.1010"
+    username = "<UserName>"
+    password = "<Password>"
   }
 
   container {
